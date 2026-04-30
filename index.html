@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI漫剧全链路创作 | 张三的个人空间</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+
+        :root {
+            --bg-color: #f0f0f0;
+            --card-bg: #ffffff;
+            --accent-black: #0a0a0a;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--accent-black);
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            width: 80px;
+            background: var(--accent-black);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 0;
+            z-index: 100;
+        }
+
+        .main-content {
+            margin-left: 80px;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .rounded-panel {
+            border-radius: 40px;
+            background: var(--card-bg);
+            overflow: hidden;
+        }
+
+        .glass-tag {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tech-pill {
+            border: 1px solid #000;
+            border-radius: 50px;
+            padding: 4px 16px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .tech-pill:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 0.9;
+            letter-spacing: -0.05em;
+        }
+
+        /* 隐藏滚动条但保持滚动 */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        .section-card {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .image-placeholder {
+            background: #e5e5e5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-placeholder::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, transparent 48%, #ccc 49%, #ccc 51%, transparent 52%);
+            background-size: 20px 20px;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 侧边栏导航 -->
+    <nav class="sidebar hidden md:flex">
+        <div class="mb-auto">
+            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-10 cursor-pointer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="space-y-8">
+                <a href="#home" class="block text-gray-500 hover:text-white transition-colors">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                </a>
+                <a href="#about" class="block text-gray-500 hover:text-white transition-colors">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </a>
+                <a href="#portfolio" class="block text-gray-500 hover:text-white transition-colors">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                </a>
+            </div>
+        </div>
+        <div class="mt-auto">
+            <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-700">
+                <!-- 头像占位 -->
+                <div class="w-full h-full bg-gradient-to-br from-gray-700 to-black flex items-center justify-center text-[10px] text-white">张三</div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <!-- 头部首屏 -->
+        <header id="home" class="rounded-panel min-h-[90vh] flex flex-col md:flex-row p-6 md:p-12 gap-8 mb-8 relative">
+            <div class="flex-1 flex flex-col justify-between z-10">
+                <div class="space-y-4">
+                    <div class="flex gap-2">
+                        <span class="tech-pill">AI 漫剧全链路</span>
+                        <span class="tech-pill">张三</span>
+                    </div>
+                    <p class="text-sm text-gray-500 max-w-xs">
+                        这是基于最新人工智能技术的漫剧创作平台。我们将光影与创意通过AI完美复刻，让故事拥有专属温度。
+                    </p>
+                    <button class="mt-6 flex items-center gap-4 px-6 py-2 border border-black rounded-full hover:bg-black hover:text-white transition-all group">
+                        EXPLORE MORE 
+                        <span class="bg-black text-white rounded-full w-8 h-8 flex items-center justify-center group-hover:bg-white group-hover:text-black">→</span>
+                    </button>
+                </div>
+
+                <div class="mt-20">
+                    <h1 class="hero-title font-black uppercase">
+                        Futuristic<br>Technologies<br>
+                        <span class="inline-flex items-center gap-4">
+                            CREATIVE <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center">
+                                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
+                            </div>
+                        </span>
+                    </h1>
+                </div>
+
+                <div class="mt-12 flex flex-wrap gap-3">
+                    <span class="tech-pill">人设</span>
+                    <span class="tech-pill">分镜</span>
+                    <span class="tech-pill">配音</span>
+                    <span class="tech-pill">剪辑</span>
+                    <span class="tech-pill">CYBER</span>
+                </div>
+            </div>
+
+            <!-- 主视觉图 - 参考原图背影风格 -->
+            <div class="flex-1 rounded-[40px] image-placeholder relative min-h-[400px]">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                <div class="absolute top-10 left-10 text-6xl font-black text-white/90 uppercase opacity-40">AI<br>COMIC</div>
+                <!-- 这里可以用真实的创作图替换 -->
+                <div class="absolute bottom-8 right-8 text-right text-[10px] uppercase tracking-widest">
+                    All Rights Reserved © 2024<br>
+                    AI COMIC MASTER STUDIO
+                </div>
+            </div>
+        </header>
+
+        <!-- 关于我 -->
+        <section id="about" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="md:col-span-2 rounded-panel p-8 md:p-12 bg-white">
+                <h2 class="text-3xl font-bold mb-6">关于我 / ABOUT ME</h2>
+                <div class="prose prose-lg text-gray-700">
+                    <p class="mb-4">大家好，我是 <strong>张三</strong>，一名专注于AI漫剧全链路创作的创作者。深耕AI漫剧领域多年，擅长用AI技术结合创意构思，打造差异化、高质感的漫剧作品。</p>
+                    <p>精通从选题策划、人设设计到后期剪辑的全流程，拒绝模板化输出，专注于让每一个故事都能传递出专属的情感与力量。</p>
+                </div>
+                <div class="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="p-4 bg-gray-50 rounded-2xl">
+                        <div class="text-2xl font-bold">X+</div>
+                        <div class="text-xs text-gray-400">从业年限</div>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-2xl">
+                        <div class="text-2xl font-bold">X部</div>
+                        <div class="text-xs text-gray-400">完整漫剧作品</div>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-2xl">
+                        <div class="text-2xl font-bold">X家</div>
+                        <div class="text-xs text-gray-400">服务合作方</div>
+                    </div>
+                </div>
+            </div>
+            <div class="rounded-panel p-8 bg-black text-white flex flex-col justify-between">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 italic">“AI是工具，创意是核心，剧情是灵魂。”</h3>
+                    <p class="text-sm text-gray-400">不局限风格，不敷衍细节——AI漫剧创作，每帧都用心。</p>
+                </div>
+                <div class="space-y-4 mt-8">
+                    <div class="flex items-center gap-3">
+                        <div class="w-2 h-2 bg-white rounded-full"></div>
+                        <span class="text-xs uppercase">即梦 / 可灵 专家</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-2 h-2 bg-white rounded-full"></div>
+                        <span class="text-xs uppercase">全链路定制服务</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 作品集 -->
+        <section id="portfolio" class="mb-8">
+            <div class="flex justify-between items-end mb-6">
+                <div>
+                    <h2 class="text-4xl font-black uppercase">Portfolio</h2>
+                    <p class="text-gray-500">每一部作品，都是一次创意的落地</p>
+                </div>
+                <div class="hidden md:flex gap-4">
+                    <span class="text-xs font-bold border-b-2 border-black pb-1">ALL</span>
+                    <span class="text-xs text-gray-400">COMIC</span>
+                    <span class="text-xs text-gray-400">CHARACTER</span>
+                    <span class="text-xs text-gray-400">SCENE</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 作品项 1 -->
+                <div class="rounded-panel aspect-[4/5] bg-white p-4 flex flex-col group cursor-pointer">
+                    <div class="flex-1 image-placeholder rounded-[30px] mb-4"></div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="font-bold">完整漫剧成片</h4>
+                            <p class="text-xs text-gray-400 uppercase">Short Film / Full Process</p>
+                        </div>
+                        <div class="w-8 h-8 rounded-full border border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all">→</div>
+                    </div>
+                </div>
+                <!-- 作品项 2 -->
+                <div class="rounded-panel aspect-[4/5] bg-white p-4 flex flex-col group cursor-pointer">
+                    <div class="flex-1 image-placeholder rounded-[30px] mb-4"></div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="font-bold">原创人设角色</h4>
+                            <p class="text-xs text-gray-400 uppercase">Character Design</p>
+                        </div>
+                        <div class="w-8 h-8 rounded-full border border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all">→</div>
+                    </div>
+                </div>
+                <!-- 作品项 3 -->
+                <div class="rounded-panel aspect-[4/5] bg-white p-4 flex flex-col group cursor-pointer">
+                    <div class="flex-1 image-placeholder rounded-[30px] mb-4"></div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="font-bold">场景资产作品</h4>
+                            <p class="text-xs text-gray-400 uppercase">Environment Assets</p>
+                        </div>
+                        <div class="w-8 h-8 rounded-full border border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all">→</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 服务业务 -->
+        <section id="services" class="rounded-panel p-8 md:p-12 bg-white mb-8">
+            <h2 class="text-3xl font-bold mb-8 text-center underline decoration-4 underline-offset-8">核心服务 / SERVICES</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="space-y-4">
+                    <div class="text-4xl font-black opacity-10">01</div>
+                    <h3 class="text-xl font-bold">全流程定制</h3>
+                    <p class="text-sm text-gray-500">从选题到发行，一站式完成。适配短剧、长剧、宣传片。</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="text-4xl font-black opacity-10">02</div>
+                    <h3 class="text-xl font-bold">单个环节代做</h3>
+                    <p class="text-sm text-gray-500">精准匹配需求，承接人设、场景、分镜、剪辑服务。</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="text-4xl font-black opacity-10">03</div>
+                    <h3 class="text-xl font-bold">教学课程</h3>
+                    <p class="text-sm text-gray-500">工具实操、提示词运用、变现思路，手把手带教。</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="text-4xl font-black opacity-10">04</div>
+                    <h3 class="text-xl font-bold">账号代运营</h3>
+                    <p class="text-sm text-gray-500">负责内容更新、剪辑、文案及粉丝维护，助力涨粉。</p>
+                </div>
+            </div>
+
+            <!-- 服务流程 -->
+            <div class="mt-16 pt-8 border-t border-gray-100">
+                <div class="flex flex-wrap justify-between gap-4">
+                    <div class="text-center">
+                        <div class="text-xs font-bold uppercase mb-2">Step 01</div>
+                        <div class="text-sm">咨询沟通</div>
+                    </div>
+                    <div class="text-gray-300">→</div>
+                    <div class="text-center">
+                        <div class="text-xs font-bold uppercase mb-2">Step 02</div>
+                        <div class="text-sm">方案报价</div>
+                    </div>
+                    <div class="text-gray-300">→</div>
+                    <div class="text-center">
+                        <div class="text-xs font-bold uppercase mb-2">Step 03</div>
+                        <div class="text-sm">支付确认</div>
+                    </div>
+                    <div class="text-gray-300">→</div>
+                    <div class="text-center">
+                        <div class="text-xs font-bold uppercase mb-2">Step 04</div>
+                        <div class="text-sm">开始创作</div>
+                    </div>
+                    <div class="text-gray-300">→</div>
+                    <div class="text-center">
+                        <div class="text-xs font-bold uppercase mb-2">Step 05</div>
+                        <div class="text-sm">终稿交付</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系方式 -->
+        <footer id="contact" class="rounded-panel p-8 md:p-12 bg-black text-white">
+            <div class="flex flex-col md:flex-row justify-between gap-12">
+                <div class="max-w-md">
+                    <h2 class="text-5xl font-black uppercase mb-6">Contact Me</h2>
+                    <p class="text-gray-400 mb-8">如果你有AI漫剧定制、合作咨询、课程报名等需求，欢迎随时联系。我会在24小时内回复。</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <span class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-xs">微信</span>
+                            <span>[你的微信号]</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center text-xs">邮箱</span>
+                            <span>[你的邮箱地址]</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex-1 bg-white/5 rounded-3xl p-8 border border-white/10">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input type="text" placeholder="您的姓名" class="bg-transparent border-b border-gray-700 py-2 outline-none focus:border-white transition-all">
+                            <input type="text" placeholder="服务类型" class="bg-transparent border-b border-gray-700 py-2 outline-none focus:border-white transition-all">
+                        </div>
+                        <textarea placeholder="您的需求详情 (预期效果、周期等)" rows="4" class="w-full bg-transparent border-b border-gray-700 py-2 outline-none focus:border-white transition-all"></textarea>
+                        <button type="submit" class="w-full py-4 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-colors uppercase">发送预约请求</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="mt-20 pt-8 border-t border-gray-800 flex justify-between items-center text-[10px] text-gray-500 uppercase tracking-widest">
+                <div>Created by Zhang San</div>
+                <div>AI-COMIC Portfolio 2024</div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // 简单的平滑滚动效果
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
